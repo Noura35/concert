@@ -1,0 +1,55 @@
+@model List<Concert>
+
+    <h2>Concerts</h2>
+    <a asp-action="Create">Add New Concert</a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Artist</th>
+            <th>Date</th>
+            <th>Venue</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var concert in Model)
+        {
+            <tr>
+                <td>@concert.Name</td>
+                <td>@concert.Artist</td>
+                <td>@concert.Date.ToString("dd-MM-yyyy")</td>
+                <td>@concert.Venue</td>
+                <td>@concert.Price</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@concert.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@concert.Id">Edit</a> |
+                    <a href="javascript:void(0);"
+                       onclick="confirmDelete(@concert.Id)">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+<!-- JavaScript for Delete Confirmation -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+        function confirmDelete(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/Concerts/Delete/' + id;
+            }
+        });
+    }
+
+</script>

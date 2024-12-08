@@ -1,0 +1,12 @@
+
+@model Concert
+
+<h2>Concert Details</h2>
+<ul>
+    <li>Name: @Model.Name</li>
+    <li>Artist: @Model.Artist</li>
+    <li>Date: @Model.Date.ToString("d")</li>
+    <li>Venue: @Model.Venue</li>
+    <li>Price: @Model.Price</li>
+</ul>
+<a asp-action="Index">Back to List</a>
